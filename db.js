@@ -13,3 +13,5 @@ const pool = new Pool({
         ca : fs.readFileSync('./ap-south-1-bundle.pem')
     }
 });
+
+module.exports = pool;
