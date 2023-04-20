@@ -5,13 +5,13 @@ var fs = require('fs');
 
 const pool = new Pool({
     user:"postgres",
-    host:"postgres-demo-1.cb2iwtkrwlhi.ap-south-1.rds.amazonaws.com",
+    host:"localhost",
     database:"project",
-    password:"SRSEETHA",
+    password:"pass",
     port:5432,
-    ssl  : {
+    /*ssl  : {
         ca : fs.readFileSync('./ap-south-1-bundle.pem')
-    }
+    }*/
 });
 
 module.exports = pool;

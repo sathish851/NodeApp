@@ -22,6 +22,10 @@ const insertTask = "INSERT INTO task_general(grp_id,task_name,task_details,assig
 const getAssignedTask = "SELECT T.task_id, T.grp_id,G.grp_name,T.task_name,T.task_details,T.assigned_by,T.assigned_to,U.username,T.deadline,T.state FROM task_general T JOIN user_tb U ON U.ui_id = T.assigned_to JOIN group_tb_admin G ON G.grp_id = T.grp_id WHERE T.assigned_by = $1";
 const getMyTask = "SELECT T.task_id, T.grp_id,G.grp_name,T.task_name,T.task_details,T.assigned_by,T.assigned_to,U.username,T.deadline,T.state FROM task_general T JOIN user_tb U ON U.ui_id = T.assigned_by JOIN group_tb_admin G ON G.grp_id = T.grp_id WHERE T.assigned_to = $1";
 const updateToDoToDoing = "UPDATE task_general SET state = 'Doing' WHERE task_id = $1";
+const updateDoingToEscalate = "UPDATE task_general SET state = 'Escalated' WHERE task_id = $1";
+const updateEscalateToDone = "UPDATE task_general SET state = 'Done' WHERE task_id = $1"
+const getTaskByGroups = "SELECT T.task_id,T.task_name,T.task_details,T.assigned_to,U.username,T.deadline,T.state,T.grp_id,G.grp_name FROM task_general T JOIN group_tb_admin G ON G.grp_id = T.grp_id JOIN user_tb U ON U.ui_id = T.assigned_to WHERE T.grp_id = $1"
+const getMembersOfTheGroup = "SELECT G.grp_id,U.ui_id,U.username FROM group_members_tb G JOIN user_tb U ON G.memeber_id = U.ui_id WHERE G.grp_id = $1";
 
 module.exports = {
     getUsers,   
@@ -48,4 +52,9 @@ module.exports = {
     getAssignedTask,
     getMyTask,
     updateToDoToDoing,
+    updateDoingToEscalate,
+    updateEscalateToDone,
+    getTaskByGroups,
+    getMembersOfTheGroup,
+    
 }

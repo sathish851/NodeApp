@@ -10,7 +10,6 @@ const getUser = (request,response) =>{
     });
 }
 
-
 const addUser = (request,response) =>{
     const {username,password,role,date_of_birth,email} = request.body;
     console.log(request.body)
@@ -29,8 +28,6 @@ const addUser = (request,response) =>{
                         }else{
                             response.status(201).send("successfully registered");
                         }
-                        
-                        
                     });
                 }
             });
@@ -199,6 +196,34 @@ const updateToDoToDoing = (request,response) =>{
     })
 }
 
+const updateDoingToEscalate = (request,response) =>{
+    var {task_id} = request.body;
+    pool.query(queries.updateDoingToEscalate,[task_id],(error,result)=>{
+        response.send("Task Escalated")
+    })
+}
+
+const updateEscalateToDone = (request,response) =>{
+    var {task_id} = request.body;
+    pool.query(queries.updateEscalateToDone,[task_id],(error,result)=>{
+        response.send("Task Done")
+    })
+}
+
+const getTaskByGroups = (request,response) =>{
+    var{grp_id} = request.body;
+    pool.query(queries.getTaskByGroups,[grp_id],(error,result)=>{
+        response.send(result.rows)
+    })
+}
+
+const getMembersByGroup = (request,response) =>{
+    var{grp_id} = request.body;
+    pool.query(queries.getMembersOfTheGroup,[grp_id],(error,result)=>{
+        response.send(result.rows)
+    })
+}
+
 module.exports = {
     getUser,
     addUser,
@@ -218,4 +243,9 @@ module.exports = {
     getAssignedTask,
     getMyTask,
     updateToDoToDoing,
+    updateDoingToEscalate,
+    updateEscalateToDone,
+    getTaskByGroups,
+    getMembersByGroup,
+    
 }

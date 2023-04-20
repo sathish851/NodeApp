@@ -20,5 +20,9 @@ router.post("/group/assigntask",controller.insertTask);
 router.post("/group/getassignedtask",controller.getAssignedTask);
 router.post("/group/getmytask",controller.getMyTask);
 router.post("/group/getmytask/todo",controller.updateToDoToDoing);
+router.post("/group/getmytask/Doing",controller.updateDoingToEscalate);
+router.post("/group/getmytask/Done",controller.updateEscalateToDone);
+router.post("/group/group/task",controller.getTaskByGroups);
+router.post("/group/group/members",controller.getMembersByGroup);
 
 module.exports = router;
